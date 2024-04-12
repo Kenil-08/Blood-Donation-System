@@ -18,20 +18,20 @@
         }
     </style>
 </head>
-<body>
+<body class=".bg-light">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="http://localhost/Blood-Donation-System/">Blood Donation System</a>
+            <a class="navbar-brand active font-weight-bold" href="http://localhost/Blood-Donation-System/">Blood Donation System</a>
             <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button> -->
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="Login.php">Login</a>
+                        <a class="nav-link text-dark" aria-current="page" href="Login.php">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Registration.php">Sign Up</a>
+                        <a class="nav-link text-dark" href="Registration.php">Sign Up</a>
                     </li> 
                 </ul>
             </div>
