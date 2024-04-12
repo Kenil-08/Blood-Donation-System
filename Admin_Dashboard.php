@@ -48,7 +48,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>User ID</th>
+                    <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Password</th>
