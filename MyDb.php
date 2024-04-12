@@ -18,5 +18,15 @@
 			$cnt = $stmt->execute();
 			return $cnt;
 		}
+
+		function selectData()
+		{
+			$qry = "SELECT * FROM tblregistration";
+			$stmt = $this->conn->prepare($qry);
+			$stmt->execute();
+			$resultSet = $stmt->get_result();
+			$data = $resultSet->fetch_all(MYSQLI_ASSOC);
+			return $data;
+		}
 	}
  ?>
