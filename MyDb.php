@@ -28,5 +28,22 @@
 			$data = $resultSet->fetch_all(MYSQLI_ASSOC);
 			return $data;
 		}
+
+		function addEvent($title,$date,$location){
+			$qry = "INSERT INTO tblEvent(title, date, location) VALUES(?,?,?)";
+			$stmt = $this->conn->prepare($qry);
+			$stmt->bind_param("sss",$title,$date,$location);
+			$cnt = $stmt->execute();
+			return $cnt;
+		}
+		
+		function selectEvent(){
+			$qry = "SELECT * FROM tblEvent";
+			$stmt = $this->conn->prepare($qry);
+			$stmt->execute();
+			$resultSet = $stmt->get_result();
+			$data = $resultSet->fetch_all(MYSQLI_ASSOC);
+			return $data;
+		}
 	}
  ?>

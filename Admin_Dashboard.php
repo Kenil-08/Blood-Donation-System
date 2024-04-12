@@ -25,7 +25,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href="manage_users.php">Manage Users</a>
+                    <a class="nav-link active" href="Admin_Dashboard.php">Manage Users</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="manage_events.php">Manage Events</a>
