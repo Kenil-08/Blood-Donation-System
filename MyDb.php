@@ -29,6 +29,14 @@
 			return $data;
 		}
 
+		function deleteUser($id){
+			$qry = "DELETE FROM tblregistration WHERE id=?";
+			$stmt = $this->conn->prepare($qry);
+			$stmt->bind_param("i",$id);
+			$cnt = $stmt->execute();
+			return $cnt;
+		}
+
 		function addEvent($title,$date,$location){
 			$qry = "INSERT INTO tblEvent(title, date, location) VALUES(?,?,?)";
 			$stmt = $this->conn->prepare($qry);

@@ -1,3 +1,8 @@
+<?php
+    include 'MyDb.php';
+    $obj = new MyDb();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,44 +47,82 @@
             </ul>
         </div>
     </nav>
-    <!-- Manage Users -->
-    <div class="container mt-4">
-        <h2>Manage Users</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Password</th>
-                    <th>Blood Type</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="userTableBody">
-            <?php
-                include 'MyDb.php';
-                $obj = new MyDb();
+    
+    <!-- Delete Modal -->
+    <div id="deleteUserModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete User</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <!-- Update Event Form -->
+                    <form id="deleteUserForm" action="Admin_Dashboard.php" method="POST">
+                        <div class="form-group">
+                            <label for="id">ID:</label>
+                            <input type="text" class="form-control" id="id" name="id_delete" >     
+                        </div>
+                        <button type="submit" name="btnDeleteUser" class="btn btn-danger">Delete User</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function openDeleteModal(Id) {
+            // Show the modal
+            $("#deleteUserModal").modal("show");
+        }
+    </script>
+</body>
+</html>
+
+<?php
+    if(isset($_POST['btnDeleteUser']))
+    {
+        $id = $_POST['id_delete'];
+        $cnt = $obj->deleteUser($id);
+        if($cnt > 0){
+            echo "<script>alert('User Deleted Successfully.')</script>";
+        }
+    }
+
+    echo "<div class='container mt-4'>";
+        echo "<table class='table'>";
+            echo "<thead>";
+                echo "<tr>";
+                    echo "<th>ID</th>";
+                    echo "<th>Name</th>";
+                    echo "<th>Email</th>";
+                    echo "<th>Password</th>";
+                    echo "<th>Blood Type</th>";
+                    echo "<th>Actions</th>";
+                echo "</tr>";
+            echo "</thead>";
+            echo "<tbody>";
                 $result = $obj->selectData();
                 foreach($result as $row)
                 {
+                    
                     echo "<tr>
                         <td>".$row["id"]."</td>
                         <td>".$row["full_name"]."</td>
                         <td>".$row["email"]."</td>
                         <td>".$row["password"]."</td>
                         <td>".$row["blood_group"]."</td>
+                        <td>
+                            <button type='button' class='btn btn-sm btn-danger' onclick='openDeleteModal(".$row["id"].")'>Delete</button>
+                        </td>
                     </tr>";
                 }
-                echo "</table>";
-            ?>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+            echo "</tbody>";
+        echo "</table>";
+    echo "</div>";
+?>
