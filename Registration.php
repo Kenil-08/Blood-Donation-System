@@ -36,11 +36,11 @@
             </button> -->
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item ">
+                    <li class="nav-item">
                         <a class="nav-link text-dark" aria-current="page" href="Login.php">Login</a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link text-dark font-weight-bold" href="Registration.php">Sign Up</a>
+                    <li class="nav-item">
+                        <a class="nav-link active text-dark" href="Registration.php">Sign Up</a>
                     </li> 
                 </ul>
             </div>
