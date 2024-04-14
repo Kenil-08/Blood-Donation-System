@@ -20,7 +20,7 @@
     </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
         <!-- <a class="navbar-brand" href="#">Admin Dashboard</a> -->
         <span class="navbar-brand mb-0 h1">Admin Dashboard</span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,41 +64,76 @@
             </div>
             <button type="submit" name="btnCreateEvent" class="btn btn-primary">Create Event</button>
         </form>
+    </div>
 
-        <hr>
+    <div id="updateEventModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Event</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <!-- Update Event Form -->
+                    <form id="updateEventForm" action="manage_events.php" method="POST">
+                        <div class="form-group">
+                            <label for="id">ID:</label>
+                            <input type="text" class="form-control" id="id" name="event_id_update" >     
+                        </div>
+                        <div class="form-group">
+                            <label for="title">Title:</label>
+                            <input type="text" class="form-control" id="title" name="title_update">
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Date:</label>
+                            <input type="date" class="form-control" id="date" name="date_update">
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location:</label>
+                            <input type="text" class="form-control" id="location" name="location_update">
+                        </div>
+                        <button type="submit" name="btnUpdateEvent" class="btn btn-primary">Update Event</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <!-- Event Table -->
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Event ID</th>
-                    <th>Title</th>
-                    <th>Date</th>
-                    <th>Location</th>
-                </tr>
-            </thead>
-            <tbody id="eventTableBody">
-                <?php
-                    $result = $obj->selectEvent();
-                    foreach($result as $row)
-                    {
-                        echo "<tr>
-                            <td>".$row["event_id"]."</td>
-                            <td>".$row["title"]."</td>
-                            <td>".$row["date"]."</td>
-                            <td>".$row["location"]."</td>
-                        </tr>";
-                    }
-                    echo "</table>";
-                ?>
-            </tbody>
-        </table>
+    <div id="deleteEventModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Event</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <!-- Update Event Form -->
+                    <form id="updateEventForm" action="manage_events.php" method="POST">
+                        <div class="form-group">
+                            <label for="id">ID:</label>
+                            <input type="text" class="form-control" id="id" name="event_id_delete" >     
+                        </div>
+                        <button type="submit" name="btnDeleteEvent" class="btn btn-danger">Delete Event</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function openUpdateModal(eventId) {
+            // Show the modal
+            $("#updateEventModal").modal("show");
+        }
+        function openDeleteModal(eventId) {
+            // Show the modal
+            $("#deleteEventModal").modal("show");
+        }
+    </script>
 </body>
 </html>
 
@@ -113,4 +148,56 @@
             echo "<script>alert('Event Created Successfully.')</script>";
         }
     }
-?>
+    if(isset($_POST['btnUpdateEvent'])){
+        $event_id = $_POST['event_id_update'];
+        $title = $_POST['title_update'];
+        $date = $_POST['date_update'];
+        $location = $_POST['location_update'];
+
+        $cnt = $obj->updateEvent($title,$date,$location,$event_id);
+        if($cnt > 0){
+            echo "<script>alert('Event Updated Successfully.')</script>";
+        }
+    }
+
+    if(isset($_POST['btnDeleteEvent'])){
+        $event_id = $_POST['event_id_delete'];
+        $cnt = $obj->deleteEvent($event_id);
+        if($cnt > 0){
+            echo "<script>alert('Event Deleted Successfully.')</script>";
+        }
+    }
+    
+    echo "<div class='container mt-4'>";
+        echo "<table class='table'>";
+        echo "<thead>";
+            echo "<tr>";
+                echo "<th>ID</th>";
+                echo "<th>Title</th>";
+                echo "<th>Date</th>";
+                echo "<th>Location</th>";
+                echo "<th>Action</th>";
+            echo "</tr>"; 
+        echo "</thead>";
+        echo "<tbody>";
+            $result = $obj->selectEvent();
+            foreach($result as $row)
+            {
+                echo "<tr>
+                    <td>".$row["event_id"]."</td>
+                    <td>".$row["title"]."</td>
+                    <td>".$row["date"]."</td>
+                    <td>".$row["location"]."</td>
+                    <td>
+                        <button type='button' class='btn btn-sm btn-primary' onclick='openUpdateModal(".$row["event_id"].")'>Update</button>
+
+                        <button type='button' class='btn btn-sm btn-danger' 
+                        onclick='openDeleteModal(".$row["event_id"].")'>Delete</button>
+                    </td>
+                </tr>";
+            }
+        echo "</tbody>";
+        echo "</table>";
+    echo "</div>";
+
+?>  

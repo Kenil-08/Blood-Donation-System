@@ -45,5 +45,23 @@
 			$data = $resultSet->fetch_all(MYSQLI_ASSOC);
 			return $data;
 		}
+
+		function updateEvent($title,$data,$location,$event_id)
+		{
+			$qry = "UPDATE tblEvent SET title=?, date=?, location=? WHERE event_id=?";
+			$stmt = $this->conn->prepare($qry);
+			$stmt->bind_param("sssi",$title,$data,$location,$event_id);
+			$cnt = $stmt->execute();
+			return $cnt;
+		}
+
+		function deleteEvent($event_id){
+			$qry = "DELETE FROM tblEvent WHERE event_id=?";
+			$stmt = $this->conn->prepare($qry);
+			$stmt->bind_param("i",$event_id);
+			$cnt = $stmt->execute();
+			return $cnt;
+		}
+
 	}
  ?>
