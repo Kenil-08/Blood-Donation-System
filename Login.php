@@ -13,7 +13,6 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <style>
-        /* Custom styles go here */
         body {
             background-color: #f8f9fa;
             font-family: Arial, sans-serif;
@@ -32,9 +31,6 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <!-- Your navigation code here -->
-
     <!-- Login Form -->
     <div class="container">
         <div class="card">
@@ -59,14 +55,10 @@
             </div>
         </div>
     </div>
-
-    <!-- Bootstrap JS -->
-    <!-- Bootstrap JS links here -->
 </body>
 </html>
 
 <?php
-    // session_start();
     if(isset($_POST['btnLogin']))
     {
         $email = $_POST['email'];
@@ -87,23 +79,16 @@
             if(password_verify($password, $hashed_password)) {
                 // Password is correct, redirect based on role
                 if($user['role'] == 'admin') {
-                    // Redirect to admin dashboard
                     header("Location: Admin_Dashboard.php");
                     exit();
                 } elseif ($user['role'] == 'user') {
-                    // Redirect to user dashboard
-                    $_SESSION['user_id'] = $user['user_id'];
-                    $_SESSION['user_name'] = $user['username'];
-                    // $_SESSION['email'] = $user['email'];
                     header("Location: User_Dashboard.php");
                     exit();
                 }
-            } else {
-                // Password is incorrect
+            } else { 
                 echo "Incorrect password";
             }
         } else {
-            // User does not exist
             echo "User not found";
         }
     }

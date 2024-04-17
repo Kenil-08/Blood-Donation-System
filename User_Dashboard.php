@@ -16,7 +16,6 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <style>
-        /* Custom styles go here */
         body {
             background-color: #f8f9fa;
             font-family: Arial, sans-serif;
@@ -54,9 +53,6 @@
                 <!-- Add more links for additional functionalities -->
             </ul>
             <ul class="navbar-nav ml-auto">
-                <!-- <li class="nav-item">
-                    <span class="navbar-text">Welcome, <?php echo $_SESSION['user_name']; ?></span>
-                </li> -->
                 <li class="nav-item">
                     <a class="nav-link" href="Login.php">Logout</a>
                 </li>

@@ -8,7 +8,6 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <style>
-        /* Custom styles go here */
         body {
             background-color: #f8f9fa;
             font-family: Arial, sans-serif;
@@ -33,13 +32,9 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="Donation_Registration.php">Donation Registration</a>
                 </li>
-                
                 <!-- Add more links for additional functionalities -->
             </ul>
             <ul class="navbar-nav ml-auto">
-                <!-- <li class="nav-item">
-                    <span class="navbar-text">Welcome, <?php echo $_SESSION['user_name']; ?></span>
-                </li> -->
                 <li class="nav-item">
                     <a class="nav-link" href="Login.php">Logout</a>
                 </li>
@@ -47,7 +42,6 @@
         </div>
     </nav>
     <div class="container">
-        <!-- <h2 class="text-center mb-4">Donation Registration</h2> -->
         <form action="#" method="POST">
             <div class="form-group">
                 <label for="name">Full Name</label>
@@ -95,7 +89,6 @@
     $obj = new MyDb();
     if(isset($_POST['btnDonate']))
 	{
-		// echo "<script>alert('Registered Successfully.')</script>";
 		$name = $_POST['name'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
@@ -103,7 +96,6 @@
         $city = $_POST['city'];
 
 		$cnt = $obj->addDonation($name, $email, $phone, $blood_group,$city);	
-		// echo $cnt . " rows inserted";
         if($cnt > 0){
             echo "<script>alert('Donation Register Successfully.')</script>";
         }

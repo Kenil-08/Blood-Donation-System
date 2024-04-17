@@ -8,7 +8,6 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <style>
-        /* Custom styles go here */
         body {
             background-color: #f8f9fa;
             font-family: Arial, sans-serif;
@@ -31,9 +30,6 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand text-dark" href="http://localhost/Blood-Donation-System/">Blood Donation System</a>
-            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button> -->
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -97,18 +93,14 @@
     $obj = new MyDb();
     if(isset($_POST['btnRegister']))
 	{
-		// echo "<script>alert('Registered Successfully.')</script>";
 		$fullname = $_POST['fullname'];
         $email = $_POST['email'];
         $password = $_POST['password'];
         $blood_group = $_POST['blood_group'];
 
 		$cnt = $obj->registerData($fullname, $email, $password, $blood_group);	
-		// echo $cnt . " rows inserted";
         if($cnt > 0){
-            // echo "<script>alert('Registered Successfully.')</script>";
             echo "<script>window.location.href='Login.php'</script>";
         }
-	}
-    
+	} 
 ?>
