@@ -25,5 +25,5 @@ Blood Donation System is a web application aimed at managing blood donation even
 
 3. Configure the database connection in `MyDb.php` file.
 
-4. Deploy the project on a web server like Apache or Nginx.
+4. Deploy the project on a web server like Apache.
 
