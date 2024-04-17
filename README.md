@@ -1,4 +1,4 @@
-# Blood Donation System 🩸
+# Blood Donation System
 
 Blood Donation System is a web application aimed at managing blood donation events and registrations. It allows users to view upcoming events, register for blood donation, and provides administrative functionalities for managing events and users.
 
