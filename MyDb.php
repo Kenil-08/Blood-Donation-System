@@ -71,5 +71,22 @@
 			return $cnt;
 		}
 
+		function addDonation($name,$email,$phone,$blood_group,$city){
+			$qry = "INSERT INTO tblDonation(name,email,phone,blood_group,city) VALUES(?,?,?,?,?)";
+			$stmt = $this->conn->prepare($qry);
+			$stmt->bind_param("sssss",$name,$email,$phone,$blood_group,$city);
+			$cnt = $stmt->execute();
+			return $cnt;
+		}
+
+		function showDonors(){
+			$qry = "SELECT * FROM tblDonation";
+			$stmt = $this->conn->prepare($qry);
+			$stmt->execute();
+			$resultSet = $stmt->get_result();
+			$data = $resultSet->fetch_all(MYSQLI_ASSOC);
+			return $data;
+		}
+
 	}
  ?>

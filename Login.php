@@ -66,6 +66,7 @@
 </html>
 
 <?php
+    // session_start();
     if(isset($_POST['btnLogin']))
     {
         $email = $_POST['email'];
@@ -91,6 +92,9 @@
                     exit();
                 } elseif ($user['role'] == 'user') {
                     // Redirect to user dashboard
+                    $_SESSION['user_id'] = $user['user_id'];
+                    $_SESSION['user_name'] = $user['username'];
+                    // $_SESSION['email'] = $user['email'];
                     header("Location: User_Dashboard.php");
                     exit();
                 }
