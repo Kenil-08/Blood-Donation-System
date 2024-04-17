@@ -32,22 +32,10 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand text-dark" href="http://localhost/Blood-Donation-System/">Blood Donation System</a>
-                <!--  -->
-            <div class="collapse navbar-collapse justify-content-end " id="navbarNav">
-                <ul class="navbar-nav ">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark active" aria-current="page" href="Login.php">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" href="Registration.php">Sign Up</a>
-                    </li> 
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <!-- Navigation -->
+    <!-- Your navigation code here -->
+
+    <!-- Login Form -->
     <div class="container">
         <div class="card">
             <div class="card-header">
@@ -73,14 +61,11 @@
     </div>
 
     <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap JS links here -->
 </body>
 </html>
 
 <?php
-
     if(isset($_POST['btnLogin']))
     {
         $email = $_POST['email'];
@@ -95,14 +80,20 @@
 
         if($result->num_rows == 1) {
             $user = $result->fetch_assoc();
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Get the hashed password from the database
 
             // Verify the password
             if(password_verify($password, $hashed_password)) {
-                // Password is correct, login successful
-                // Redirect the user to the dashboard or another page
-                header("Location: Admin_Dashboard.php");
-                exit();
+                // Password is correct, redirect based on role
+                if($user['role'] == 'admin') {
+                    // Redirect to admin dashboard
+                    header("Location: Admin_Dashboard.php");
+                    exit();
+                } elseif ($user['role'] == 'user') {
+                    // Redirect to user dashboard
+                    header("Location: User_Dashboard.php");
+                    exit();
+                }
             } else {
                 // Password is incorrect
                 echo "Incorrect password";
@@ -113,4 +104,3 @@
         }
     }
 ?>
-
